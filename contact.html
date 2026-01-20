@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="東京福祉不動産へのお問い合わせページ。些細なことでもお気軽にお問い合わせください。" />
+  <title>お問い合わせ | 東京福祉不動産</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="fadeout">
+  <div class="wrap">
+    <!-- ヘッダーここから -->
+    <header class="animate__animated animate__fadeIn" style="animation-duration: 1s; animation-delay: 0.3s;">
+      <div class="header">
+        <h1 class="header__logo">
+          <a href="index.html"><img src="img/common/logo.png" alt="東京福祉不動産" /></a>
+        </h1>
+        <!-- PC用ナビ -->
+        <div class="header__nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="housingsupport.html">居住支援</a></li>
+            <li><a href="mediation.html">不動産仲介</a></li>
+            <li><a href="companyprofile.html">会社概要</a></li>
+            <li><a href="contact.html">お問い合わせ</a></li>
+            <li class="telnav"><span style="font-size: 1.4rem">お気軽にご連絡ください</span><br /><i
+                class="fas fa-phone fa-fw"></i>03-5876-4717</li>
+          </ul>
+        </div>
+      </div>
+      <!-- スマホ用ハンバーガー -->
+      <div class="header__nav-sp">
+        <div class="openbtn1"><span></span><span></span><span></span></div>
+        <nav id="g-nav">
+          <div id="g-nav-list">
+            <ul>
+              <li><a href="index.html"><img src="img/common/logo2_white.png" alt="東京福祉不動産" /></a></li>
+              <li><a href="index.html">ホーム</a></li>
+              <li><a href="housingsupport.html">居住支援</a></li>
+              <li><a href="mediation.html">不動産仲介</a></li>
+              <li><a href="sustainability.html">サステナビリティ</a></li>
+              <li><a href="group.html">グループ会社</a></li>
+              <li><a href="companyprofile.html">会社概要</a></li>
+              <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="circle-bg"></div>
+      </div>
+      <div class="line"></div>
+    </header>
+    <!-- ヘッダーここまで -->
+
+    <style>
+      .container.antisales {
+        font-size: 12px;
+      }
+    </style>
+
+    <!-- コンテンツここから -->
+    <main>
+      <!-- お問い合わせセクション -->
+      <section id="contact">
+        <div class="yohaku"></div>
+
+        <div class="container">
+          <h2>お問い合わせ</h2>
+          <p>
+            お問い合わせはこちらからご連絡ください。<br>
+            些細な事やちょっと気になったことなどお気軽に聞いていただければと思います。<br>
+            お電話でのお問い合わせは<a href="tel:03-5876-4717"><i class="fas fa-phone fa-fw"></i>03-5876-4717</a>までご連絡ください。
+          </p>
+        </div>
+        <div class="container antisales">
+          <p>
+            電話やメール、当サイトのフォームを利用した当社への売り込みの一切をお断りしています。
+            特に、お問い合わせフォームを利用した売り込みが多くみうけられます。 しかし、当社のフォームは、当社の既存のお客さまからの連絡や、ウェブサイト構築でお悩みのお客さまなどからのお問い合わせを目的として設置したものです。
+            売り込みはこの目的外の利用であり、当社業務の阻害要因となることから、サイトポリシーの記載とおりフォームを利用した売り込みの一切を固く禁止いたします。
+            お問い合わせフォームを利用して、繰り返し売り込みをおこなう企業様には、しかるべき対応を取らせていただく場合があります。
+          </p>
+        </div>
+        <div class="container formarea">
+          <!-- お問い合わせフォーム -->
+          <form id="contact-form" name="submit-to-google-sheet">
+            <table class="form-table">
+              <tr>
+                <th>お名前 <span style="color: red;">*</span></th>
+                <td><input type="text" name="name" placeholder="例）山田 太郎" required></td>
+              </tr>
+              <tr>
+                <th>フリガナ</th>
+                <td><input type="text" name="furigana" placeholder="例）ヤマダ タロウ"></td>
+              </tr>
+              <tr>
+                <th>メールアドレス <span style="color: red;">*</span></th>
+                <td><input type="email" name="email" placeholder="例）example@email.com" required></td>
+              </tr>
+              <tr>
+                <th>電話番号</th>
+                <td><input type="text" name="tel" placeholder="例）03-1234-5678"></td>
+              </tr>
+              <tr>
+                <th>お問い合わせ種別</th>
+                <td>
+                  <select name="type">
+                    <option value="">選択してください</option>
+                    <option value="居住支援について">居住支援について</option>
+                    <option value="不動産仲介について">不動産仲介について</option>
+                    <option value="その他">その他</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <th>お問い合わせ内容 <span style="color: red;">*</span></th>
+                <td><textarea name="content" placeholder="お問い合わせ内容をご記入ください" required></textarea></td>
+              </tr>
+            </table>
+            <p>
+              <input type="submit" value="送信する" class="submit">
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+    <!-- コンテンツここまで -->
+
+    <!-- フッターここから -->
+    <footer>
+      <div class="container">
+        <div class="footer__logo">
+          <a href="index.html"><img src="img/common/logo2.png" alt="東京福祉不動産" /></a>
+        </div>
+        <div class="footer__companyprofile">
+          <ul>
+            <li>【会社名】<i class="fas fa-building"></i>東京福祉不動産</li>
+            <li>
+              【住　所】<i class="fas fa-map-marker-alt"></i>〒125-0032東京都葛飾区水元4-26-13
+            </li>
+            <li>
+              【電　話】<a href="tel:0358764717"><i class="fas fa-phone-volume"></i>03-5876-4717</a>
+            </li>
+            <li>【F A X】<i class="fas fa-fax"></i>03-5876-4718</li>
+            <li><a href="https://lin.ee/De4CyCv"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png"
+                  alt="友だち追加" style="width:150px;" border="0"></a></li>
+          </ul>
+        </div>
+        <div class="footer__companyprofile">
+          <ul>
+            <li>【免許登録】</li>
+            <li>宅地建物取引業 東京都知事（１）第106886号</li>
+            <li>【加盟団体】</li>
+            <li>公益社団法人 東京都宅地建物取引業協会</li>
+            <li>公益社団法人 全国宅地建物取引業保証協会東京本部</li>
+            <li>全国不動産政治連盟</li>
+          </ul>
+        </div>
+        <div class="footer__nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="housingsupport.html">居住支援</a></li>
+            <li><a href="mediation.html">不動産仲介</a></li>
+            <li><a href="sustainability.html">サステナビリティ</a></li>
+            <li><a href="group.html">グループ会社</a></li>
+            <li><a href="companyprofile.html">会社概要</a></li>
+            <li><a href="contact.html">お問い合わせ</a></li>
+            <li><a href="privacypolicy.html">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <small>Copyright © TOKYO FUKUSHI REAL ESTATE CO., LTD. All rights reserved.</small>
+      </div>
+    </footer>
+    <div class="fixedfooter">
+      <ul>
+        <li>
+          <a href="contact.html"><i class="fas fa-envelope fa-fw"></i>お問い合わせ</a>
+        </li>
+        <li>
+          <a href="tel:0358764717"><i class="fas fa-phone fa-fw"></i>03-5876-4717</a>
+        </li>
+      </ul>
+    </div>
+    <!-- フッターここまで -->
+  </div>
+  <!-- wrap ここまで -->
+
+  <!-- script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="js/myscript.js"></script>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbynBOCXrUUgHAGcZS2xdMV8vz4SzaDpSt5xG3V58QID4iXYo514S1GvMs_F4I_QErqo/exec';
+    const form = document.forms['submit-to-google-sheet'];
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => alert("お問い合わせありがとうございます。送信完了しました。"))
+        .then(() => { window.location.reload(); })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+
+</html>
