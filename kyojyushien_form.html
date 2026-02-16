@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="東京福祉不動産居住支援の情報提供依頼書フォームです。" />
+  <meta property="og:title" content="居住支援お問い合わせ | 東京福祉不動産" />
+  <meta property="og:description" content="居住支援の情報提供依頼書フォームです。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://test.tff21.co.jp/kyojyushien_form.html" />
+  <meta property="og:image" content="https://test.tff21.co.jp/img/ogp.jpg" />
+  <meta property="og:site_name" content="東京福祉不動産" />
+  <link rel="icon" href="img/common/favicon.ico" />
+  <title>居住支援お問い合わせ | 東京福祉不動産</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* フォーム固有のスタイル */
+    :root {
+      /* style.cssの変数を使用するため、ここではローカルな調整のみ */
+      --form-bg-color: #f8fafb;
+      --form-border-color: #e5e7eb;
+      --form-radius: 8px;
+    }
+
+    /* 上書き・調整 */
+    .form-section {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 3rem;
+    }
+
+    .form-section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: 1rem;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .col-span-2 {
+        grid-column: span 2;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .form-group label {
+      font-weight: 700;
+      color: var(--color-text);
+      font-size: 1.5rem;
+    }
+
+    .required {
+      color: #ff6b6b;
+      font-size: 1.2rem;
+      margin-left: 0.5rem;
+      background: #fff0f0;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* 入力フィールドのスタイル調整 (style.cssの.formareaに合わせる) */
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="tel"],
+    .form-group input[type="date"],
+    .form-group select,
+    .form-group textarea {
+      background: var(--color-bg-light);
+      border: 1px solid var(--color-border-light);
+      font-size: 1.6rem;
+      padding: 1.2rem 1.5rem;
+      width: 100%;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      background: #e9f5fb;
+      box-shadow: 0 0 0 3px rgba(118, 209, 243, 0.3);
+      border-color: var(--color-primary);
+      outline: none;
+    }
+
+    /* ラジオボタン・チェックボックス */
+    .radio-group,
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 0.5rem 0;
+    }
+
+    .radio-group label,
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      transform: scale(1.2);
+      margin-right: 0.8rem;
+      accent-color: var(--color-primary);
+    }
+
+    /* 隠し要素 */
+    .hidden {
+      display: none;
+    }
+
+    /* 追加詳細エリア */
+    .income-detail-group {
+      background-color: var(--color-bg-light);
+      padding: 1.5rem;
+      border-radius: var(--form-radius);
+      margin-top: 1rem;
+      border: 1px solid var(--color-border-light);
+    }
+
+    /* テーブル */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    .custom-table .radio-group {
+      flex-wrap: nowrap;
+    }
+
+    .custom-table th {
+      background: rgba(118, 209, 243, 0.2);
+      padding: 1.2rem;
+      text-align: left;
+      font-weight: 700;
+      border-bottom: 2px solid var(--color-primary);
+    }
+
+    .custom-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .custom-table input {
+      width: 100%;
+    }
+
+    /* インライン入力 */
+    .inline-input-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .unit {
+      white-space: nowrap;
+    }
+
+    /* 送信ボタン */
+    .submit-btn {
+      background: linear-gradient(135deg, var(--color-primary) 0%, #5bc0eb 100%);
+      color: #fff;
+      padding: 1.5rem 6rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 15px rgba(118, 209, 243, 0.4);
+      display: block;
+      margin: 4rem auto 0;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(118, 209, 243, 0.5);
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 768px) {
+      .custom-table thead {
+        display: none;
+      }
+
+      .custom-table tr {
+        display: block;
+        margin-bottom: 2rem;
+        border: 1px solid var(--color-border-light);
+        padding: 1rem;
+        border-radius: 10px;
+      }
+
+      .custom-table td {
+        display: block;
+        padding: 0.5rem 0;
+      }
+
+      .custom-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--color-primary);
+      }
+    }
+  </style>
+</head>
+
+<body class="fadeout">
+  <div class="wrap">
+    <!-- ヘッダーここから -->
+    <header class="animate__animated animate__fadeIn" style="animation-duration: 1s; animation-delay: 0.3s;">
+      <div class="header">
+        <h1 class="header__logo">
+          <a href="index.html"><img src="img/common/logo.png" alt="東京福祉不動産" loading="lazy" /></a>
+        </h1>
+        <div class="header__nav">
+          <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="housingsupport.html">居住支援</a></li>
+            <li><a href="kyojyushien_form.html" style="color: #ff6b6b;"><i class="fas fa-file-alt"></i> 居住支援申請</a></li>
+            <li><a href="mediation.html">不動産仲介</a></li>
+            <li><a href="companyprofile.html">会社概要</a></li>
+            <li><a href="contact.html">お問い合わせ</a></li>
+            <li class="telnav"><span style="font-size: 1.4rem">お気軽にご連絡ください</span><br /><i
+                class="fas fa-phone fa-fw"></i>03-5876-4717</li>
+          </ul>
+        </div>
+      </div>
+      <div class="header__nav-sp">
+        <div class="openbtn1"><span></span><span></span><span></span></div>
+        <nav id="g-nav">
+          <div id="g-nav-list">
+            <ul>
+              <li><a href="index.html"><img src="img/common/logo2_white.png" alt="東京福祉不動産" loading="lazy" /></a></li>
+              <li><a href="index.html">ホーム</a></li>
+              <li><a href="housingsupport.html">居住支援</a></li>
+              <li><a href="kyojyushien_form.html" style="color: #ff6b6b;"><i class="fas fa-file-alt"></i> 居住支援申請</a>
+              </li>
+              <li><a href="mediation.html">不動産仲介</a></li>
+
+              <li><a href="group.html">グループ会社</a></li>
+              <li><a href="companyprofile.html">会社概要</a></li>
+              <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="circle-bg"></div>
+      </div>
+      <div class="line"></div>
+    </header>
+    <!-- ヘッダーここまで -->
+
+    <div class="pageheader_housingsupport animate__animated animate__fadeIn" style="animation-duration: 1s;">
+      <h3>Housing Support<br><span>居住支援お問い合わせ</span></h3>
+    </div>
+
+    <!-- コンテンツここから -->
+    <main>
+      <section>
+        <div class="container">
+          <h2>東京福祉不動産居住支援 情報提供依頼書</h2>
+          <p style="margin-bottom: 4rem;">
+            居住支援に関する詳細なご相談はこちらのフォームより承ります。<br>
+            必要事項をご入力の上、送信してください。
+          </p>
+
+          <form method="post"
+            action="https://script.google.com/macros/s/AKfycbzuEhemrRKZL7RM8GEQpZmf31r0eTMdllN5808f87LVxv7GG9W2Wm8iPIgMjC2nkKk/exec"
+            name="submit-to-google-sheet-housing">
+            <input type="hidden" name="form_type" value="housing_support">
+            <input type="hidden" name="uketsuke_date" id="uketsuke_date">
+
+            <!-- お問い合わせ区分 -->
+            <div class="form-section" style="background-color: #eaf6fd; border: 2px solid var(--color-primary);">
+              <div class="form-section-title">お問い合わせ区分</div>
+              <p style="margin-bottom: 1.5rem; font-weight: bold;">どなたからのご連絡ですか？</p>
+              <div class="radio-group">
+                <label><input type="radio" name="contact_type" value="honnnin" checked id="type_honnin">
+                  入居希望者ご本人</label>
+                <label><input type="radio" name="contact_type" value="family" id="type_family"> ご家族・ご親族</label>
+                <label><input type="radio" name="contact_type" value="organization" id="type_org"> 支援団体・行政機関</label>
+                <label><input type="radio" name="contact_type" value="other" id="type_other"> その他</label>
+              </div>
+            </div>
+
+            <!-- 申込者（代理人）情報 -->
+            <div class="form-section hidden" id="applicant_section"
+              style="background-color: #fffbf0; border-color: #ffd700;">
+              <div class="form-section-title">申込者（代理人）情報</div>
+              <p style="margin-bottom: 1.5rem; color: #666;">入居希望者ご本人以外からのご連絡の場合は、ご連絡者様の情報をご入力ください。</p>
+              <div class="grid grid-2">
+                <div class="form-group">
+                  <label>申込者ふりがな<span class="required">必須</span></label>
+                  <input type="text" name="applicant_furigana" placeholder="例：かつしか はなこ" id="app_furigana">
+                </div>
+                <div class="form-group">
+                  <label>申込者氏名<span class="required">必須</span></label>
+                  <input type="text" name="applicant_name" placeholder="例：葛飾 花子" id="app_name">
+                </div>
+                <div class="form-group">
+                  <label>申込者電話番号<span class="required">必須</span></label>
+                  <input type="tel" name="applicant_tel" placeholder="例：09098765432" id="app_tel">
+                </div>
+                <div class="form-group">
+                  <label>入居希望者との関係<span class="required">必須</span></label>
+                  <input type="text" name="applicant_relation" placeholder="例：長女、担当ケースワーカー等" id="app_relation">
+                </div>
+                <div class="form-group col-span-2">
+                  <label>法人・団体名（支援団体等の場合）</label>
+                  <input type="text" name="applicant_org_name" placeholder="例：〇〇包括支援センター">
+                </div>
+              </div>
+            </div>
+
+            <!-- 入居希望者について -->
+            <div class="form-section">
+              <div class="form-section-title">入居希望者について</div>
+              <div class="grid grid-2">
+                <div class="form-group">
+                  <label>ふりがな<span class="required">必須</span></label>
+                  <input type="text" name="furigana" placeholder="例：かつしか たろう" required>
+                </div>
+                <div class="form-group">
+                  <label>氏名<span class="required">必須</span></label>
+                  <input type="text" name="name" placeholder="例：葛飾 太郎" required>
+                </div>
+                <div class="form-group">
+                  <label>生年月日<span class="required">必須</span></label>
+                  <div class="inline-input-group">
+                    <input type="date" name="birthdate" id="birthdate" required>
+                    <span id="ageDisplay" style="font-weight:bold; min-width: 3em; font-size:1.6rem;"></span>
+                  </div>
+                  <input type="hidden" name="age" id="ageInput">
+                </div>
+                <div class="form-group">
+                  <label>電話番号<span class="required">必須</span></label>
+                  <input type="tel" name="tel" placeholder="例：09012345678" required>
+                </div>
+                <div class="form-group col-span-2">
+                  <label>住所<span class="required">必須</span></label>
+                  <div class="grid grid-2" style="gap: 1rem;">
+                    <select name="addr_pref">
+                      <option value="東京都">東京都</option>
+                      <option value="神奈川県">神奈川県</option>
+                      <option value="千葉県" selected>千葉県</option>
+                      <option value="埼玉県">埼玉県</option>
+                      <option value="その他">その他</option>
+                    </select>
+                    <input type="text" name="addr_city" placeholder="区市町村以下（番地・建物名まで）" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>生活保護</label>
+                  <div class="radio-group">
+                    <label><input type="radio" name="seikatsu_hogo" value="none"> 無</label>
+                    <label><input type="radio" name="seikatsu_hogo" value="have"> 有</label>
+                    <label><input type="radio" name="seikatsu_hogo" value="soudan"> 相談中</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>収入</label>
+                  <div class="radio-group">
+                    <label><input type="radio" name="income_status" value="none" id="income_none"> 無</label>
+                    <label><input type="radio" name="income_status" value="have" id="income_have"> 有</label>
+                  </div>
+                </div>
+
+                <!-- 収入：無 の場合（表示時は全幅） -->
+                <div class="form-group col-span-2 hidden" id="income_none_detail">
+                  <div class="income-detail-group">
+                    <div style="margin-bottom:0.5rem; font-weight:bold;">（収入：無 の場合）</div>
+                    <div class="checkbox-group">
+                      <label><input type="checkbox" name="income_none_seikatsu_app" value="1"> 生活保護申請・相談中</label>
+                      <label>預金 約 <input type="number" name="income_none_savings"
+                          style="width:100px; margin: 0 0.5rem; display:inline-block;">
+                        万円</label>
+                      <label>他 <input type="text" name="income_none_other"
+                          style="width: 200px; margin-left: 0.5rem; display:inline-block;"></label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 収入：有 の場合（表示時は全幅） -->
+                <div class="form-group col-span-2 hidden" id="income_have_detail">
+                  <div class="income-detail-group">
+                    <div style="margin-bottom:0.5rem; font-weight:bold;">（収入：有 の場合）収入内訳</div>
+                    <div class="checkbox-group">
+                      <label><input type="checkbox" name="income_have_pension" value="1"> 年金</label>
+                      <label><input type="checkbox" name="income_have_salary" value="1"> 給与</label>
+                      <label>他 <input type="text" name="income_have_other"
+                          style="width: 200px; margin-left: 0.5rem; display:inline-block;"></label>
+                    </div>
+                    <div class="inline-input-group" style="margin-top: 1rem;">
+                      <label style="margin:0; font-size:1.4rem;">月額</label>
+                      <input type="number" name="income_have_amount" style="width:150px;">
+                      <span class="unit">万円</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-span-2">
+                  <label>転居理由<span class="required">必須</span></label>
+                  <div class="checkbox-group">
+                    <label><input type="checkbox" name="reason_1" value="tachi_noki"> 立退き（老朽化・滞納）</label>
+                    <label><input type="checkbox" name="reason_2" value="rent_high"> 家賃が高い</label>
+                    <label><input type="checkbox" name="reason_3" value="dokuritsu"> 独立</label>
+                    <label><input type="checkbox" name="reason_4" value="other"> その他</label>
+                    <input type="text" name="reason_other" placeholder="その他の理由"
+                      style="max-width: 300px; display:inline-block;">
+                  </div>
+                </div>
+
+                <div class="form-group col-span-2">
+                  <label>退去期限</label>
+                  <div class="radio-group">
+                    <label><input type="radio" name="wish_taikyo" value="none"> なし</label>
+                    <label><input type="radio" name="wish_taikyo" value="limit"> 期限あり</label>
+                    <div class="inline-input-group" style="margin-left: 1rem;">
+                      <span>（令和</span>
+                      <input type="number" name="wish_taikyo_year" style="width:80px;">
+                      <span>年</span>
+                      <input type="number" name="wish_taikyo_month" style="width:80px;">
+                      <span>月末まで）</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-span-2">
+                  <label>初期費用（敷金等）の用意</label>
+                  <div class="checkbox-group">
+                    <label><input type="checkbox" name="shoki_can" value="1"> 可</label>
+                    <label><input type="checkbox" name="shoki_from_seikatsu" value="1"> 生保から支給予定</label>
+                    <label><input type="checkbox" name="shoki_none" value="1"> なし</label>
+                    <div class="inline-input-group">
+                      <label><input type="checkbox" name="shoki_have_month" value="1"> あり</label>
+                      <span>（</span>
+                      <input type="number" name="shoki_month" style="width:80px;">
+                      <span>ヶ月分）</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 世帯構成 -->
+            <div class="form-section">
+              <div class="form-section-title">世帯構成</div>
+              <div class="table-container">
+                <table class="custom-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 60px;">No.</th>
+                      <th>入居者続柄</th>
+                      <th style="width: 80px;">年齢</th>
+                      <th>介護や手帳について</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td data-label="No.">1</td>
+                      <td data-label="入居者続柄"><input type="text" name="member1_zokugara" value="本人"></td>
+                      <td data-label="年齢"><input type="number" name="member1_age"></td>
+                      <td data-label="介護や手帳について">
+                        <div class="radio-group">
+                          <label><input type="radio" name="member1_care" value="none" checked> なし</label>
+                          <label><input type="radio" name="member1_care" value="yo_shien"> 要支援・介護</label>
+                          <label><input type="radio" name="member1_care" value="techo"> 手帳等</label>
+                        </div>
+                        <input type="text" name="member1_care_detail" placeholder="詳細を記入" style="margin-top: 0.5rem;">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="No.">2</td>
+                      <td data-label="入居者続柄"><input type="text" name="member2_zokugara"></td>
+                      <td data-label="年齢"><input type="number" name="member2_age"></td>
+                      <td data-label="介護や手帳について">
+                        <div class="radio-group">
+                          <label><input type="radio" name="member2_care" value="none" checked> なし</label>
+                          <label><input type="radio" name="member2_care" value="yo_shien"> 要支援・介護</label>
+                          <label><input type="radio" name="member2_care" value="techo"> 手帳等</label>
+                        </div>
+                        <input type="text" name="member2_care_detail" placeholder="詳細を記入" style="margin-top: 0.5rem;">
+                      </td>
+                    </tr>
+                    <!-- 省略せず3,4も入れる場合 -->
+                    <tr>
+                      <td data-label="No.">3</td>
+                      <td data-label="入居者続柄"><input type="text" name="member3_zokugara"></td>
+                      <td data-label="年齢"><input type="number" name="member3_age"></td>
+                      <td data-label="介護や手帳について">
+                        <div class="radio-group">
+                          <label><input type="radio" name="member3_care" value="none" checked> なし</label>
+                          <label><input type="radio" name="member3_care" value="yo_shien"> 要支援・介護</label>
+                          <label><input type="radio" name="member3_care" value="techo"> 手帳等</label>
+                        </div>
+                        <input type="text" name="member3_care_detail" placeholder="詳細を記入" style="margin-top: 0.5rem;">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- 現在の住居について -->
+            <div class="form-section">
+              <div class="form-section-title">現在の住居について</div>
+              <div class="grid grid-2">
+                <div class="form-group col-span-2">
+                  <label>住宅の種類<span class="required">必須</span></label>
+                  <div class="radio-group">
+                    <label><input type="radio" name="now_house_type" value="chintai"> 賃貸</label>
+                    <label><input type="radio" name="now_house_type" value="kashiya"> 借家</label>
+                    <label><input type="radio" name="now_house_type" value="karima"> 借間</label>
+                    <label><input type="radio" name="now_house_type" value="other"> 他</label>
+                    <input type="text" name="now_house_type_other" placeholder="その他の内容"
+                      style="max-width: 200px; display:inline-block;">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>間取り</label>
+                  <input type="text" name="now_madori" placeholder="例：1K、2DK">
+                </div>
+                <div class="form-group">
+                  <label>家賃 月額</label>
+                  <div class="inline-input-group">
+                    <input type="number" name="now_rent" placeholder="">
+                    <span class="unit">万円</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>不動産管理会社名</label>
+                  <input type="text" name="now_mgmt_company">
+                </div>
+                <div class="form-group">
+                  <label>利用賃貸保証会社</label>
+                  <div class="radio-group">
+                    <label><input type="radio" name="now_guarantor_use" value="none"> 無し</label>
+                    <label><input type="radio" name="now_guarantor_use" value="have"> 有り</label>
+                  </div>
+                  <input type="text" name="now_guarantor_name" placeholder="有りの場合、会社名など" style="margin-top:0.5rem">
+                </div>
+              </div>
+            </div>
+
+            <!-- 希望する物件について -->
+            <div class="form-section">
+              <div class="form-section-title">希望する物件について</div>
+              <div class="grid grid-2">
+                <div class="form-group">
+                  <label>家賃 上限月額<span class="required">必須</span></label>
+                  <div class="inline-input-group">
+                    <input type="number" name="wish_rent_max" placeholder="" required>
+                    <span class="unit">万円（管理費込）</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>間取り・Rタイプ</label>
+                  <div class="grid grid-2" style="gap: 0.5rem;">
+                    <input type="text" name="wish_madori" placeholder="間取り 例：1K">
+                    <input type="text" name="wish_r_type" placeholder="Rタイプ 例：SOHO">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>ペット</label>
+                  <div class="radio-group">
+                    <label><input type="radio" name="wish_pet" value="none"> 無</label>
+                    <label><input type="radio" name="wish_pet" value="have"> 有</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>エリア・駅</label>
+                  <div class="checkbox-group">
+                    <label><input type="checkbox" name="wish_area_katsushika" value="1"> 葛飾区内</label>
+                    <label><input type="checkbox" name="wish_area_all" value="1"> 区内全域</label>
+                  </div>
+                  <div class="inline-input-group" style="margin-top:0.5rem;">
+                    <span style="font-size: 1.4rem;">駅徒歩</span>
+                    <input type="number" name="wish_walk_minutes" style="width: 100px;">
+                    <span class="unit">分以内</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>階数</label>
+                  <div class="radio-group">
+                    <label><input type="radio" name="wish_floor" value="1f"> 1階</label>
+                    <label><input type="radio" name="wish_floor" value="2f_plus"> 2階以上</label>
+                  </div>
+                </div>
+
+                <div class="form-group col-span-2">
+                  <label>設備</label>
+                  <div class="checkbox-group">
+                    <label><input type="checkbox" name="wish_toilet" value="1"> トイレ</label>
+                    <label><input type="checkbox" name="wish_bath" value="1"> 風呂</label>
+                    <label><input type="checkbox" name="wish_unit" value="1"> ユニット可</label>
+                    <label>他 <input type="text" name="wish_equipment_other" placeholder="その他の希望"
+                        style="max-width: 200px; display:inline-block;"></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-span-2">
+              <label>備考</label>
+              <textarea name="bikou" placeholder="特記事項があればご記入ください" rows="4"></textarea>
+            </div>
+        </div>
+  </div>
+
+  <button type="submit" class="submit-btn">送信する</button>
+  </form>
+
+  </div>
+  </section>
+  </main>
+  <!-- コンテンツここまで -->
+
+  <!-- フッターここから -->
+  <footer>
+    <div class="container">
+      <div class="footer__logo">
+        <a href="index.html"><img src="img/common/logo2.png" alt="東京福祉不動産" loading="lazy" /></a>
+      </div>
+      <div class="footer__companyprofile">
+        <ul>
+          <li>【会社名】<i class="fas fa-building"></i>東京福祉不動産</li>
+          <li>
+            【住　所】<i class="fas fa-map-marker-alt"></i>〒125-0032東京都葛飾区水元4-26-13
+          </li>
+          <li>
+            【電　話】<a href="tel:0358764717"><i class="fas fa-phone-volume"></i>03-5876-4717</a>
+          </li>
+          <li>【F A X】<i class="fas fa-fax"></i>03-5876-4718</li>
+          <li><a href="https://lin.ee/De4CyCv"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png"
+                alt="友だち追加" style="width:150px;" border="0" loading="lazy"></a></li>
+        </ul>
+      </div>
+      <div class="footer__companyprofile">
+        <ul>
+          <li>【免許登録】</li>
+          <li>宅地建物取引業 東京都知事（１）第106886号</li>
+          <li>【加盟団体】</li>
+          <li>公益社団法人 東京都宅地建物取引業協会</li>
+          <li>公益社団法人 全国宅地建物取引業保証協会東京本部</li>
+          <li>全国不動産政治連盟</li>
+        </ul>
+      </div>
+      <div class="footer__nav">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="housingsupport.html">居住支援</a></li>
+          <li><a href="mediation.html">不動産仲介</a></li>
+          <li><a href="sustainability.html">サステナビリティ</a></li>
+          <li><a href="group.html">グループ会社</a></li>
+          <li><a href="companyprofile.html">会社概要</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+          <li><a href="privacypolicy.html">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <small>Copyright © TOKYO FUKUSHI REAL ESTATE CO., LTD. All rights reserved.</small>
+    </div>
+  </footer>
+  <div class="fixedfooter">
+    <ul>
+      <li>
+        <a href="contact.html"><i class="fas fa-envelope fa-fw"></i>お問い合わせ</a>
+      </li>
+      <li>
+        <a href="tel:0358764717"><i class="fas fa-phone fa-fw"></i>03-5876-4717</a>
+      </li>
+    </ul>
+  </div>
+  <!-- フッターここまで -->
+  </div>
+  <!-- wrap ここまで -->
+
+  <!-- script -->
+  <script src="js/myscript.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 1. 受付日自動セット
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      const isoDate = `${year}-${month}-${day}`;
+
+      const uketsukeInput = document.getElementById('uketsuke_date');
+      if (uketsukeInput) uketsukeInput.value = isoDate;
+
+      // 2. 年齢自動計算
+      const birthInput = document.getElementById('birthdate');
+      const ageDisplay = document.getElementById('ageDisplay');
+      const ageInput = document.getElementById('ageInput');
+
+      function updateAge() {
+        if (!birthInput.value) {
+          ageDisplay.textContent = '';
+          ageInput.value = '';
+          return;
+        }
+        const dob = new Date(birthInput.value);
+        if (isNaN(dob.getTime())) {
+          ageDisplay.textContent = '';
+          ageInput.value = '';
+          return;
+        }
+
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+          age--;
+        }
+        age = Math.max(0, age);
+
+        ageDisplay.textContent = `（${age}歳）`;
+        ageInput.value = age;
+      }
+
+      if (birthInput) {
+        birthInput.addEventListener('change', updateAge);
+        birthInput.addEventListener('input', updateAge);
+      }
+
+      // 3. 収入セクションのトグル
+      const incomeNoneRadio = document.getElementById('income_none');
+      const incomeHaveRadio = document.getElementById('income_have');
+      const incomeNoneDetail = document.getElementById('income_none_detail');
+      const incomeHaveDetail = document.getElementById('income_have_detail');
+
+      function updateIncomeDisplay() {
+        if (incomeNoneRadio.checked) {
+          incomeNoneDetail.classList.remove('hidden');
+          incomeHaveDetail.classList.add('hidden');
+        } else if (incomeHaveRadio.checked) {
+          incomeNoneDetail.classList.add('hidden');
+          incomeHaveDetail.classList.remove('hidden');
+        } else {
+          incomeNoneDetail.classList.add('hidden');
+          incomeHaveDetail.classList.add('hidden');
+        }
+      }
+
+      if (incomeNoneRadio && incomeHaveRadio) {
+        incomeNoneRadio.addEventListener('change', updateIncomeDisplay);
+        incomeHaveRadio.addEventListener('change', updateIncomeDisplay);
+      }
+
+      // 4. お問い合わせ区分の切り替え制御
+      const typeRadios = document.getElementsByName('contact_type');
+      const applicantSection = document.getElementById('applicant_section');
+      const appInputs = [
+        document.getElementById('app_furigana'),
+        document.getElementById('app_name'),
+        document.getElementById('app_tel'),
+        document.getElementById('app_relation')
+      ];
+
+      function updateContactType() {
+        let isHonnin = true;
+        for (const radio of typeRadios) {
+          if (radio.checked && radio.value !== 'honnnin') {
+            isHonnin = false;
+            break;
+          }
+        }
+
+        if (isHonnin) {
+          applicantSection.classList.add('hidden');
+          appInputs.forEach(input => input.required = false);
+        } else {
+          applicantSection.classList.remove('hidden');
+          appInputs.forEach(input => input.required = true);
+        }
+      }
+
+      typeRadios.forEach(radio => {
+        radio.addEventListener('change', updateContactType);
+      });
+      // 初期実行
+      updateContactType();
+
+      // 4. 送信処理 (Google Apps Script)
+      const form = document.forms['submit-to-google-sheet-housing'];
+      if (form) {
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+          // 送信ボタンを使用不可にして二重送信防止
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const originalBtnText = submitBtn.innerText;
+          submitBtn.disabled = true;
+          submitBtn.innerText = "送信中...";
+
+          fetch(form.action, { method: 'POST', body: new FormData(form) })
+            .then(response => {
+              alert("お問い合わせありがとうございます。送信完了しました。");
+              window.location.href = 'index.html'; // トップページへリダイレクト
+            })
+            .catch(error => {
+              console.error('Error!', error.message);
+              alert("送信に失敗しました。時間をおいて再度お試しください。");
+              submitBtn.disabled = false;
+              submitBtn.innerText = originalBtnText;
+            });
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

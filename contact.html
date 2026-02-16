@@ -6,6 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="東京福祉不動産へのお問い合わせページ。些細なことでもお気軽にお問い合わせください。" />
+  <meta property="og:title" content="お問い合わせ | 東京福祉不動産" />
+  <meta property="og:description" content="些細なことでもお気軽にお問い合わせください。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://test.tff21.co.jp/contact.html" />
+  <meta property="og:image" content="https://test.tff21.co.jp/img/ogp.jpg" />
+  <meta property="og:site_name" content="東京福祉不動産" />
+  <link rel="icon" href="img/common/favicon.ico" />
   <title>お問い合わせ | 東京福祉不動産</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -25,6 +32,7 @@
           <ul>
             <li><a href="index.html">ホーム</a></li>
             <li><a href="housingsupport.html">居住支援</a></li>
+            <li><a href="kyojyushien_form.html" style="color: #ff6b6b;"><i class="fas fa-file-alt"></i> 居住支援申請</a></li>
             <li><a href="mediation.html">不動産仲介</a></li>
             <li><a href="companyprofile.html">会社概要</a></li>
             <li><a href="contact.html">お問い合わせ</a></li>
@@ -42,8 +50,10 @@
               <li><a href="index.html"><img src="img/common/logo2_white.png" alt="東京福祉不動産" /></a></li>
               <li><a href="index.html">ホーム</a></li>
               <li><a href="housingsupport.html">居住支援</a></li>
+              <li><a href="kyojyushien_form.html" style="color: #ff6b6b;"><i class="fas fa-file-alt"></i> 居住支援申請</a>
+              </li>
               <li><a href="mediation.html">不動産仲介</a></li>
-              <li><a href="sustainability.html">サステナビリティ</a></li>
+
               <li><a href="group.html">グループ会社</a></li>
               <li><a href="companyprofile.html">会社概要</a></li>
               <li><a href="contact.html">お問い合わせ</a></li>
@@ -191,7 +201,6 @@
   <!-- wrap ここまで -->
 
   <!-- script -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="js/myscript.js"></script>
 
   <script>
@@ -200,11 +209,25 @@
 
     form.addEventListener('submit', e => {
       e.preventDefault();
+      // 二重送信防止
+      const submitBtn = form.querySelector('.submit');
+      const originalBtnValue = submitBtn.value;
+      submitBtn.disabled = true;
+      submitBtn.value = '送信中...';
+
       fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(response => alert("お問い合わせありがとうございます。送信完了しました。"))
-        .then(() => { window.location.reload(); })
-        .catch(error => console.error('Error!', error.message))
-    })
+        .then(response => {
+          alert('お問い合わせありがとうございます。送信完了しました。');
+          window.location.reload();
+        })
+        .catch(error => {
+          console.error('Error!', error.message);
+          alert('送信に失敗しました。時間をおいて再度お試しください。');
+          submitBtn.disabled = false;
+          submitBtn.value = originalBtnValue;
+        });
+    });
   </script>
+</body>
 
 </html>
